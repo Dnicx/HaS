@@ -5,10 +5,12 @@ using UnityEngine;
 public class Door : MonoBehaviour {
     private bool isAction;
     private float rotation;
+    private float startRotation;
 
 	// Use this for initialization
 	void Start () {
         isAction = false;
+        startRotation = transform.eulerAngles.y;
         rotation = 0;
 	}
 	
@@ -19,24 +21,15 @@ public class Door : MonoBehaviour {
         }
         if (isAction)
         {
-           rotation = Input.GetAxis("Mouse Y") * 5;
-
-
+            rotation -= Input.GetAxis("Mouse Y") * 5;
+            rotation = rotation < 0 ? 0 : rotation;
+            rotation = rotation > 135 ? 135 : rotation;
         }
     }
 
     private void FixedUpdate()
     {
-        transform.Rotate(0, rotation, 0);
-        print(transform.rotation.eulerAngles);
-        if(transform.eulerAngles.y < 225 && transform.eulerAngles.y > 135)
-        {
-           transform.eulerAngles = new Vector3(0,225,0);
-        }
-        else if(transform.eulerAngles.y > 0 && transform.eulerAngles.y < 90)
-        {
-           transform.eulerAngles = new Vector3(0, 0, 0);
-        }
+        transform.rotation = Quaternion.Euler(new Vector3(0, startRotation-rotation,0));
     }
 
     public void action()
