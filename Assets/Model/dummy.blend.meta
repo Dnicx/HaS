@@ -26,7 +26,7 @@ ModelImporter:
     4300004: Cube_001
     7400000: idle
     7400002: Walk
-    7400004: Crouch
+    7400004: CrouchWalk
     7400006: CrouchIdle
     9500000: //RootNode
   externalObjects: {}
@@ -59,8 +59,8 @@ ModelImporter:
     - serializedVersion: 16
       name: idle
       takeName: Default Take
-      firstFrame: 240
-      lastFrame: 249
+      firstFrame: 409
+      lastFrame: 410
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -113,10 +113,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Crouch
+      name: CrouchWalk
       takeName: Default Take
-      firstFrame: 160
-      lastFrame: 197
+      firstFrame: 240
+      lastFrame: 320
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -143,8 +143,8 @@ ModelImporter:
     - serializedVersion: 16
       name: CrouchIdle
       takeName: Default Take
-      firstFrame: 192
-      lastFrame: 209
+      firstFrame: 186
+      lastFrame: 200
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -171,7 +171,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
