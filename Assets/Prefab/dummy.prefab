@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 143521449637737236}
   - component: {fileID: 65843110201018046}
   - component: {fileID: 114433124271018806}
+  - component: {fileID: 114392895677895800}
+  - component: {fileID: 114278896959371764}
+  - component: {fileID: 114513057882360310}
   m_Layer: 0
   m_Name: dummy
   m_TagString: Untagged
@@ -58,10 +61,9 @@ GameObject:
   - component: {fileID: 20825847964770018}
   - component: {fileID: 124517903787464544}
   - component: {fileID: 81256648756004144}
-  - component: {fileID: 114366310313184894}
   m_Layer: 0
   m_Name: Player Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -364,17 +366,59 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114366310313184894
+--- !u!114 &114278896959371764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1353228745803204}
+  m_GameObject: {fileID: 1056081609324620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d10fdf98a28277842bee245bcb619d3f, type: 3}
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TransformSyncMode: 4
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114392895677895800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056081609324620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 252
+    i1: 40
+    i2: 66
+    i3: 21
+    i4: 133
+    i5: 50
+    i6: 111
+    i7: 228
+    i8: 186
+    i9: 80
+    i10: 203
+    i11: 133
+    i12: 9
+    i13: 201
+    i14: 172
+    i15: 24
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114433124271018806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -389,7 +433,26 @@ MonoBehaviour:
   speed: 3
   gravity: 2
   crouchFactor: 0.6
-  standable: 0
+  playerCam: {fileID: 20825847964770018}
+--- !u!114 &114513057882360310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1056081609324620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95093881476492016}
+  m_ParameterSendBits: 3
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!124 &124517903787464544
 Behaviour:
   m_ObjectHideFlags: 1

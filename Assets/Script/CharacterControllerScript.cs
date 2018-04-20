@@ -1,33 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterControllerScript : MonoBehaviour {
+public class CharacterControllerScript : NetworkBehaviour {
 
 	private CharacterController characterController;
 	[SerializeField] private float speed;
 	[SerializeField] private float gravity;
 	[SerializeField] private float crouchFactor;
-	[SerializeField] private float fallingSpeed;
+	private float fallingSpeed;
 	private Vector3 moveDirection;
 	private float x, z;
 	private Animator anim;
-	[SerializeField] private bool standable;
+	private bool standable;
+	[SerializeField] private Camera playerCam;
+	private Camera mainCam;
+	private Camera otherCam;
 
 	private float height;
+	private float look;
 
 	// Use this for initialization
 	void Start () {
 		characterController = GetComponent<CharacterController>();
 		anim = GetComponent<Animator>();
 		height = characterController.height;
+		characterController.center = new Vector3(characterController.center.x, height/2, characterController.center.z);
 		standable = true;
+		mainCam = Camera.main;
+		if (mainCam != null) mainCam.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (!isLocalPlayer) {
+			otherCam = GetComponentInChildren<Camera>();
+			if (otherCam != null) 
+				otherCam.gameObject.SetActive(false);
+			return;
+		}
+
 		x = Input.GetAxis("Horizontal");		
 		z = Input.GetAxis("Vertical");
+
 		if (x != 0 || z != 0) {
 			anim.SetBool("isWalk", true);
 		} else {
@@ -44,13 +60,19 @@ public class CharacterControllerScript : MonoBehaviour {
 				characterController.height = height;
 			}
 		}
-		transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
+		
 		fallingSpeed += gravity;
 		if (characterController.isGrounded) fallingSpeed = 0;
 		moveDirection = new Vector3(z, 0, -x);
 		moveDirection = transform.TransformDirection(moveDirection) * speed * Time.deltaTime;
 		moveDirection.y -= fallingSpeed * Time.deltaTime;
 		characterController.Move(moveDirection);
+
+		transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
+		look -= Input.GetAxis("Mouse Y");
+		look = look > 90 ? 90 : look;
+		look = look < -90 ? -90 : look;
+		playerCam.transform.rotation = Quaternion.Euler(new Vector3(look, transform.localEulerAngles.y+90, transform.rotation.eulerAngles.z));
 	}
 
 	private void OnTriggerStay(Collider other) {
@@ -58,6 +80,10 @@ public class CharacterControllerScript : MonoBehaviour {
 	}
 	private void OnTriggerExit(Collider other) {
 		standable = true;
+	}
+
+	private void OnDestroy() {
+		if (mainCam != null) mainCam.gameObject.SetActive(true);
 	}
 
 	
