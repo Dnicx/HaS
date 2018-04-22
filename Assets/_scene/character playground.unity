@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -293,14 +293,14 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 38767eb29f729db4c950dcfaaab42e68, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.391
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0.4
   MinDistance: 1
   MaxDistance: 100
   Pan2D: 0
@@ -871,7 +871,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2126955679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: f553b1160fd91844caec4e53c42edf70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -883,12 +883,12 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1056081609324620, guid: fc28421585326fe4ba50cb8509c9ac18,
+  m_PlayerPrefab: {fileID: 1798789308428178, guid: 5ce5a65e6db1f114cbd91f55c42bbc15,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
-  m_OnlineScene: 
+  m_OnlineScene: character playground
   m_SpawnPrefabs: []
   m_CustomConfig: 0
   m_MaxConnections: 4
@@ -945,6 +945,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  playerPrefab2: {fileID: 1988401334400076, guid: bba0ce44c45c99147ad7b27541ad255a,
+    type: 2}
 --- !u!4 &2126955681
 Transform:
   m_ObjectHideFlags: 0
@@ -969,7 +971,7 @@ MonoBehaviour:
   m_Script: {fileID: 227461547, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
+  manager: {fileID: 2126955680}
   showGUI: 1
-  offsetX: 0
-  offsetY: 0
+  offsetX: 22
+  offsetY: -11
