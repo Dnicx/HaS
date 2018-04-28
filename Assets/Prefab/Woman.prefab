@@ -4444,6 +4444,7 @@ MonoBehaviour:
   speed: 10
   gravity: 9.8
   crouchFactor: 0
+  holdObject: {fileID: 0}
   playerCam: {fileID: 20408016013916898}
   actionCollider: {fileID: 114864159149950730}
 --- !u!114 &114864159149950730

@@ -14,6 +14,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 	private float x, z;
 	private Animator anim;
 	private bool standable;
+
 	[SerializeField] private Camera playerCam;
 	private Camera mainCam;
 	private Camera otherCam;
@@ -32,6 +33,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 		characterController.center = new Vector3(characterController.center.x, height/2, characterController.center.z);
 		standable = true;
 		mainCam = Camera.main;
+        actionCollider = mainCam.GetComponent<ActionCollider>();
+
 		if (mainCam != null) mainCam.gameObject.SetActive(false);
 		for (int i = 0; i < transform.childCount; i++) {
 			model.Add(transform.GetChild(i).GetComponent<SkinnedMeshRenderer>());
@@ -54,6 +57,15 @@ public class CharacterControllerScript : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!isLocalPlayer) return;
+
+        if(actionCollider.isItemHold() && Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            actionCollider.ToggleHold();
+        }
+        if(actionCollider.isItemHold() && actionCollider.IsHold() && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            actionCollider.ThrowItemHold();
+        }
 
 		x = Input.GetAxis("Vertical");		
 		z = Input.GetAxis("Horizontal");
