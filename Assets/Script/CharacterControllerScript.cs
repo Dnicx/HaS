@@ -14,6 +14,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 	private float x, z;
 	private Animator anim;
 	private bool standable;
+
 	[SerializeField] private Camera playerCam;
 	private Camera mainCam;
 	private Camera otherCam;
@@ -40,12 +41,23 @@ public class CharacterControllerScript : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isLocalPlayer) {
+       // print(transform.forward);
+
+        if (!isLocalPlayer) {
 			otherCam = GetComponentInChildren<Camera>();
 			if (otherCam != null) 
 				otherCam.gameObject.SetActive(false);
 			return;
 		}
+
+        if(actionCollider.isItemHold() && Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            actionCollider.ToggleHold();
+        }
+        if(actionCollider.isItemHold() && actionCollider.IsHold() && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            actionCollider.ThrowItemHold();
+        }
 
 		x = Input.GetAxis("Vertical");		
 		z = Input.GetAxis("Horizontal");
