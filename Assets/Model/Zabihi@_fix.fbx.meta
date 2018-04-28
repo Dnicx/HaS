@@ -1,0 +1,166 @@
+fileFormatVersion: 2
+guid: 6cbafd09a454791478a1b89067ad65f3
+timeCreated: 1524900144
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Ammo_Box01
+    100002: Ammo_Box02
+    100004: Ammo_Box03
+    100006: Ammo_Box04
+    100008: Belt
+    100010: Body
+    100012: Body_BF_Eye_L
+    100014: Body_BF_Eye_R
+    100016: Body_BF_LTeeth
+    100018: Body_BF_UTeeth
+    100020: handgun-Cover
+    100022: Left-ties
+    100024: Object
+    100026: //RootNode
+    400000: Ammo_Box01
+    400002: Ammo_Box02
+    400004: Ammo_Box03
+    400006: Ammo_Box04
+    400008: Belt
+    400010: Body
+    400012: Body_BF_Eye_L
+    400014: Body_BF_Eye_R
+    400016: Body_BF_LTeeth
+    400018: Body_BF_UTeeth
+    400020: handgun-Cover
+    400022: Left-ties
+    400024: Object
+    400026: //RootNode
+    2100000: 'Material #83'
+    2100002: 'Material #84'
+    2100004: Eyes
+    2100006: bullet_cover
+    2100008: handgun-cover
+    2100010: Head
+    2100012: 'Material #59'
+    2100014: Body
+    2100016: 'Material #60'
+    2100018: 'Material #61'
+    2100020: 'Material #61.001'
+    2100022: Belt
+    2300000: Ammo_Box01
+    2300002: Ammo_Box02
+    2300004: Ammo_Box03
+    2300006: Ammo_Box04
+    2300008: Belt
+    2300010: Body
+    2300012: Body_BF_Eye_L
+    2300014: Body_BF_Eye_R
+    2300016: Body_BF_LTeeth
+    2300018: Body_BF_UTeeth
+    2300020: handgun-Cover
+    2300022: Left-ties
+    2300024: Object
+    3300000: Ammo_Box01
+    3300002: Ammo_Box02
+    3300004: Ammo_Box03
+    3300006: Ammo_Box04
+    3300008: Belt
+    3300010: Body
+    3300012: Body_BF_Eye_L
+    3300014: Body_BF_Eye_R
+    3300016: Body_BF_LTeeth
+    3300018: Body_BF_UTeeth
+    3300020: handgun-Cover
+    3300022: Left-ties
+    3300024: Object
+    4300000: Body_BF_UTeeth
+    4300002: Body_BF_LTeeth
+    4300004: Body_BF_Eye_L
+    4300006: Body_BF_Eye_R
+    4300008: Ammo_Box02
+    4300010: Ammo_Box01
+    4300012: Ammo_Box04
+    4300014: Ammo_Box03
+    4300016: handgun-Cover
+    4300018: Body
+    4300020: Object
+    4300022: Left-ties
+    4300024: Belt
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -19,6 +19,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 	private Camera otherCam;
 
     [SerializeField] private ActionCollider actionCollider;
+	[SerializeField] private List<Renderer> model;
 
 	private float height;
 	private float look;
@@ -31,21 +32,28 @@ public class CharacterControllerScript : NetworkBehaviour {
 		characterController.center = new Vector3(characterController.center.x, height/2, characterController.center.z);
 		standable = true;
 		mainCam = Camera.main;
-        //actionCollider = mainCam.GetComponent<ActionCollider>();
-        if (mainCam != null) {
-            mainCam.gameObject.SetActive(false);
-        }
-
+		if (mainCam != null) mainCam.gameObject.SetActive(false);
+		for (int i = 0; i < transform.childCount; i++) {
+			model.Add(transform.GetChild(i).GetComponent<SkinnedMeshRenderer>());
+			if (isLocalPlayer && model[i] != null) model[i].shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+		}
+		model.Clear();
+		for (int i = 0; i < transform.childCount; i++) {
+			model.Add(transform.GetChild(i).GetComponent<MeshRenderer>());
+			if (isLocalPlayer && model[i] != null) model[i].shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+		}
+		if (!isLocalPlayer) {	
+			otherCam = GetComponentInChildren<Camera>();
+			if (otherCam != null) 
+				// otherCam.GetComponentInChildren<AudioListener>().enabled = false;
+				otherCam.gameObject.SetActive(false);
+			return;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isLocalPlayer) {
-			otherCam = GetComponentInChildren<Camera>();
-			if (otherCam != null) 
-				otherCam.gameObject.SetActive(false);
-			return;
-		}
+		if (!isLocalPlayer) return;
 
 		x = Input.GetAxis("Vertical");		
 		z = Input.GetAxis("Horizontal");
@@ -69,10 +77,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 		
 		fallingSpeed += gravity;
 		if (characterController.isGrounded) fallingSpeed = 0;
-        
-		
-
-        if (!actionCollider.IsAction())
+        if (actionCollider==null || !actionCollider.IsAction())
         {
             Move();
             Rotate();
