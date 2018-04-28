@@ -18,6 +18,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 	private Camera mainCam;
 	private Camera otherCam;
 
+    [SerializeField] private ActionCollider actionCollider;
+
 	private float height;
 	private float look;
 
@@ -29,7 +31,11 @@ public class CharacterControllerScript : NetworkBehaviour {
 		characterController.center = new Vector3(characterController.center.x, height/2, characterController.center.z);
 		standable = true;
 		mainCam = Camera.main;
-		if (mainCam != null) mainCam.gameObject.SetActive(false);
+        //actionCollider = mainCam.GetComponent<ActionCollider>();
+        if (mainCam != null) {
+            mainCam.gameObject.SetActive(false);
+        }
+
 	}
 	
 	// Update is called once per frame
@@ -41,8 +47,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 			return;
 		}
 
-		x = Input.GetAxis("Horizontal");		
-		z = Input.GetAxis("Vertical");
+		x = Input.GetAxis("Vertical");		
+		z = Input.GetAxis("Horizontal");
 
 		if (x != 0 || z != 0) {
 			anim.SetBool("isWalk", true);
@@ -63,19 +69,34 @@ public class CharacterControllerScript : NetworkBehaviour {
 		
 		fallingSpeed += gravity;
 		if (characterController.isGrounded) fallingSpeed = 0;
-		moveDirection = new Vector3(z, 0, -x);
-		moveDirection = transform.TransformDirection(moveDirection) * speed * Time.deltaTime;
-		moveDirection.y -= fallingSpeed * Time.deltaTime;
-		characterController.Move(moveDirection);
+        
+		
 
-		transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
-		look -= Input.GetAxis("Mouse Y");
-		look = look > 90 ? 90 : look;
-		look = look < -90 ? -90 : look;
-		playerCam.transform.rotation = Quaternion.Euler(new Vector3(look, transform.localEulerAngles.y+90, transform.rotation.eulerAngles.z));
+        if (!actionCollider.IsAction())
+        {
+            Move();
+            Rotate();
+        }
 	}
 
-	private void OnTriggerStay(Collider other) {
+    private void Move()
+    {
+        moveDirection = new Vector3(z, 0, x);
+        moveDirection = transform.TransformDirection(moveDirection) * speed * Time.deltaTime;
+        moveDirection.y -= fallingSpeed * Time.deltaTime;
+        characterController.Move(moveDirection);
+    }
+
+    private void Rotate()
+    {
+        transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
+        look -= Input.GetAxis("Mouse Y");
+        look = look > 90 ? 90 : look;
+        look = look < -90 ? -90 : look;
+        playerCam.transform.rotation = Quaternion.Euler(new Vector3(look, transform.localEulerAngles.y, transform.rotation.eulerAngles.z));
+    }
+
+    private void OnTriggerStay(Collider other) {
 		if (other != this) standable = false;
 	}
 	private void OnTriggerExit(Collider other) {
