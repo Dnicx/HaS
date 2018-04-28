@@ -92,7 +92,6 @@ public class ActionCollider : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other);
         if (other.gameObject.CompareTag("Interact Obj"))
         {
             interactObj = other.gameObject;
