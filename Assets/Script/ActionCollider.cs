@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ActionCollider : MonoBehaviour {
     private PickableObj itemHold;
+    private PickableObj threwItem;
     private bool isHold;
-    private bool isThrow;
     private GameObject interactObj;
     private bool isAction;
 
@@ -13,7 +13,6 @@ public class ActionCollider : MonoBehaviour {
 	void Start () {
         isAction = false;
         interactObj = null;
-        isThrow = false;
         isHold = false;
         Physics.IgnoreLayerCollision(9, 10);
         Debug.Log("spawn action col");
@@ -27,7 +26,7 @@ public class ActionCollider : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 PickableObj tmp = obj as PickableObj;
-                if (tmp != null && tmp != itemHold)
+                if (tmp != null && threwItem == null)
                 {
                     itemHold = interactObj.GetComponent<PickableObj>();
                     itemHold.Pick();
@@ -42,20 +41,12 @@ public class ActionCollider : MonoBehaviour {
                 isAction = false;
                 obj.noAction();
             }
-            if (isThrow && obj != itemHold)
-            {
-                itemHold = null;
-                isThrow = false;
-            }
+            print(obj + " " + itemHold);
 
         }
         else
         {
-            if (isThrow)
-            {
-                itemHold = null;
-                isThrow = false;
-            }
+
             isAction = false;
         }
 
@@ -66,7 +57,14 @@ public class ActionCollider : MonoBehaviour {
             Vector3 direction = this.transform.forward.normalized * 0.5f;
             itemHold.transform.position = new Vector3(this.transform.position.x + direction.x, (this.transform.position.y - 0.1f + direction.y), this.transform.position.z + direction.z) + transform.right.normalized*0.3f;
         }
-	}
+
+        if (threwItem != null)
+        {
+            itemHold = null;
+            threwItem = null;
+
+        }
+    }
 
     public bool IsAction()
     {
@@ -82,8 +80,8 @@ public class ActionCollider : MonoBehaviour {
     {
         if(itemHold != null)
         {
-            isThrow = true;
             isHold = false;
+            threwItem = itemHold;
             itemHold.ThrowObj();
         }
     }

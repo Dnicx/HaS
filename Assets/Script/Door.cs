@@ -32,11 +32,16 @@ public class Door : InteractabltObj {
                 setStartDirection = false;
                 Vector2 tmp = new Vector2(startDirection.x, startDirection.z);
                 changeDirection = 1;
-                if (((startDirection.x >= 0 && startDirection.z > 0) && (actionDirection.x >= startDirection.x || actionDirection.z >= startDirection.z)) ||
-                    ((startDirection.x > 0 && startDirection.z <= 0) && (actionDirection.x >= startDirection.x || (actionDirection.x < startDirection.x && actionDirection.y <= startDirection.z))) ||
-                    ((startDirection.x <= 0 && startDirection.z > 0) && (actionDirection.z >= startDirection.z || (actionDirection.z < startDirection.z && actionDirection.x <= startDirection.x))) ||
-                    ((startDirection.x < 0 && startDirection.z <= 0) && (actionDirection.z <= startDirection.z || actionDirection.x <= startDirection.x)))
+                Vector2 vec1 = new Vector2(startDirection.x, startDirection.z);
+                Vector2 vec2 = new Vector2(actionDirection.x, actionDirection.z);
+
+                Vector2 vec1Rotated90 = new Vector2(-vec1.y, vec1.x);
+                float sign = (Vector2.Dot(vec1Rotated90, vec2) < 0) ? -1.0f : 1.0f;
+                float angle = Vector2.Angle(vec1, vec2) * sign;
+
+                if (angle <= 90 && angle >= -90)
                 {
+
                     changeDirection = -1;
                 }
             }
