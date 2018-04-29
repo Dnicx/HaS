@@ -31,7 +31,6 @@ public class Door : InteractabltObj {
                 startDirection = transform.forward.normalized;
                 setStartDirection = false;
                 Vector2 tmp = new Vector2(startDirection.x, startDirection.z);
-                print(actionDirection +" "+ startDirection);
                 changeDirection = 1;
                 if (((startDirection.x >= 0 && startDirection.z > 0) && (actionDirection.x >= startDirection.x || actionDirection.z >= startDirection.z)) ||
                     ((startDirection.x > 0 && startDirection.z <= 0) && (actionDirection.x >= startDirection.x || (actionDirection.x < startDirection.x && actionDirection.y <= startDirection.z))) ||
