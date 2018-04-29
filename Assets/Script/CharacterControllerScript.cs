@@ -12,20 +12,19 @@ public class CharacterControllerScript : NetworkBehaviour {
 	[SerializeField] private float proneSpeed;
 	[SerializeField] private float gravity;
 	[SerializeField] private float crouchFactor;
+	[SerializeField] private float attackT;
 	private float fallingSpeed;
 	private Vector3 moveDirection;
 	private float x, z;
 	private Animator anim;
-	[SerializeField] private bool standable;
-	private bool running;
-	[SerializeField] private float currentSpeed;
-
 	[SerializeField] private Camera playerCam;
 	private Camera mainCam;
 	private Camera otherCam;
+	[SerializeField] private GameObject hitBox;
+	[SerializeField] private GameObject hurtBox;
+	private playerStatus playerStat;
 
     [SerializeField] private ActionCollider actionCollider;
-	[SerializeField] private List<Renderer> model;
 
 	private float height;
 	private Vector3 camPos;
@@ -33,8 +32,16 @@ public class CharacterControllerScript : NetworkBehaviour {
 
 	private float t;
 
-	// debug
+	//status part
+	[SerializeField] private bool standable;
+	private bool running;
+	[SerializeField] private float currentSpeed;
+	private bool attacking;
+	private bool cooledDown = true;
+
+	//serialize to debug
 	[SerializeField] private bool localVisible = false;
+	[SerializeField] private List<Renderer> model;
 
 	// Use this for initialization
 	void Start () {
@@ -44,9 +51,9 @@ public class CharacterControllerScript : NetworkBehaviour {
 		characterController.center = new Vector3(characterController.center.x, height/2, characterController.center.z);
 		standable = true;
 		mainCam = Camera.main;
-		Debug.Log("spawn human");
         actionCollider = playerCam.GetComponent<ActionCollider>();
 		camPos = playerCam.transform.localPosition;
+		playerStat = GetComponent<playerStatus>();
 
 		if (mainCam != null) mainCam.gameObject.SetActive(false);
 		for (int i = 0; i < transform.childCount; i++) {
@@ -70,6 +77,10 @@ public class CharacterControllerScript : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!isLocalPlayer) return;
+		if (playerStat.IsDead()) {
+			anim.SetBool("isDead", true);
+			return;
+		}
 
         if(actionCollider.isItemHold() && Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -97,8 +108,9 @@ public class CharacterControllerScript : NetworkBehaviour {
 			}
 		} else {
 			anim.SetBool("isWalk", false);
+			anim.SetBool("isRun", false);
 		}
-		if (Input.GetAxisRaw("Crouch") > 0) {
+		if (Input.GetAxisRaw("Crouch") > 0 && !attacking) {
 			anim.SetBool("isCrouch", true);
 			currentSpeed = crouchSpeed;
 			characterController.center = new Vector3(characterController.center.x, height*crouchFactor/2, characterController.center.z);
@@ -114,14 +126,26 @@ public class CharacterControllerScript : NetworkBehaviour {
 				playerCam.transform.localPosition = Vector3.Lerp(camPos, camPos*crouchFactor,t);
 			}
 		}
+		if (cooledDown) {
+			if (Input.GetAxis("Attack") > 0 && playerStat.isArmed()) {
+				hitBox.GetComponent<hitArea>().Hit();
+				anim.SetBool("isAttack", true);
+				StartCoroutine(attackTime());
+				StartCoroutine(cooldownTime());
+				if (playerStat.IsPredator()) playerStat.unequip();
+			}
+		}
+		else anim.SetBool("isAttack", false);
 		
 		fallingSpeed += gravity;
 		if (characterController.isGrounded) fallingSpeed = 0;
         if (actionCollider==null || !actionCollider.IsAction())
-        {
-            Move();
-            Rotate();
-        }
+		{
+			if (!attacking) {
+	            Move();
+			}
+			Rotate();
+		}
 	}
 
     private void Move()
@@ -135,14 +159,13 @@ public class CharacterControllerScript : NetworkBehaviour {
     private void Rotate()
     {
         transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
-        look -= Input.GetAxis("Mouse Y");
+        look -= PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse Y");
         look = look > 60 ? 60 : look;
         look = look < -90 ? -90 : look;
         playerCam.transform.rotation = Quaternion.Euler(new Vector3(look, transform.localEulerAngles.y, transform.rotation.eulerAngles.z));
     }
 
     private void OnTriggerStay(Collider other) {
-		Debug.Log(other);
 		if (other.gameObject.tag != gameObject.tag) standable = false;
 	}
 	private void OnTriggerExit(Collider other) {
@@ -154,4 +177,15 @@ public class CharacterControllerScript : NetworkBehaviour {
 	}
 
 	
+	IEnumerator attackTime() {
+		attacking = true;
+		yield return new WaitForSeconds(attackT);
+		attacking = false;
+	}
+
+	IEnumerator cooldownTime() {
+		cooledDown = false;
+		yield return new WaitForSeconds(attackT*2);
+		cooledDown = true;
+	}
 }

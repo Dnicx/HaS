@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Interact Obj
   - ActionCollider
+  - Predator
+  - Prey
   layers:
   - Default
   - TransparentFX

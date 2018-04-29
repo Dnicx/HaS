@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightSwitch : InteractabltObj {
     [SerializeField]
-    private List<Light> light;
+    private List<Light> lightSource;
     private bool isLightOn;
     private int isToggle;
 	// Use this for initialization
@@ -18,7 +18,7 @@ public class LightSwitch : InteractabltObj {
         if (isToggle == 0)
         {
             isToggle = 1;
-            foreach (Light l in light)
+            foreach (Light l in lightSource)
             {
                 l.enabled = !l.enabled;
             }
