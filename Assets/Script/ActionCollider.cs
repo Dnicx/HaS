@@ -1,37 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ActionCollider : MonoBehaviour {
     private PickableObj itemHold;
+    private PickableObj threwItem;
     private bool isHold;
-    private bool isThrow;
     private GameObject interactObj;
     private bool isAction;
+    [SerializeField]
+    private Text text;
 
 	// Use this for initialization
 	void Start () {
         isAction = false;
         interactObj = null;
-        isThrow = false;
         isHold = false;
+        text = GameObject.Find("ActionText").GetComponent<Text>();
+
         Physics.IgnoreLayerCollision(9, 10);
         Debug.Log("spawn action col");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(interactObj != null)
+		if(interactObj != null && !isHold)
         {
             InteractabltObj obj = interactObj.GetComponent<InteractabltObj>();
+            text.text = "Left Click to action";
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 PickableObj tmp = obj as PickableObj;
-                if (tmp != null && tmp != itemHold)
+                if (tmp != null && threwItem == null)
                 {
                     itemHold = interactObj.GetComponent<PickableObj>();
                     itemHold.Pick();
                     isHold = true;
+                    interactObj = null;
                 }
                 isAction = true;
                 obj.actionDirection = this.transform.forward.normalized;
@@ -42,20 +49,12 @@ public class ActionCollider : MonoBehaviour {
                 isAction = false;
                 obj.noAction();
             }
-            if (isThrow && obj != itemHold)
-            {
-                itemHold = null;
-                isThrow = false;
-            }
+            //print(obj + " " + itemHold);
 
         }
         else
         {
-            if (isThrow)
-            {
-                itemHold = null;
-                isThrow = false;
-            }
+            text.text = "";
             isAction = false;
         }
 
@@ -66,7 +65,14 @@ public class ActionCollider : MonoBehaviour {
             Vector3 direction = this.transform.forward.normalized * 0.5f;
             itemHold.transform.position = new Vector3(this.transform.position.x + direction.x, (this.transform.position.y - 0.1f + direction.y), this.transform.position.z + direction.z) + transform.right.normalized*0.3f;
         }
-	}
+
+        if (threwItem != null)
+        {
+            itemHold = null;
+            threwItem = null;
+
+        }
+    }
 
     public bool IsAction()
     {
@@ -82,8 +88,8 @@ public class ActionCollider : MonoBehaviour {
     {
         if(itemHold != null)
         {
-            isThrow = true;
             isHold = false;
+            threwItem = itemHold;
             itemHold.ThrowObj();
         }
     }
@@ -108,7 +114,8 @@ public class ActionCollider : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Interact Obj"))
         {
-            interactObj = other.gameObject;
+            if(other.gameObject != itemHold)
+                interactObj = other.gameObject;
             
         }
 
