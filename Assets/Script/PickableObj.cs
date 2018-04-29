@@ -7,7 +7,7 @@ public class PickableObj : InteractabltObj {
     public void Keep()
     {
         Collider collider = (GetComponent<Collider>());
-
+        collider.enabled = false;
         this.gameObject.SetActive(false);
     }
 
@@ -23,6 +23,5 @@ public class PickableObj : InteractabltObj {
         Collider collider = (GetComponent<Collider>());
         collider.enabled = true;
         this.GetComponent<Rigidbody>().velocity = new Vector3(transform.forward.normalized.x,transform.forward.normalized.y+0.1f,transform.forward.normalized.z) * 30;
-        print(this.GetComponent<Rigidbody>().velocity);
     }
 }

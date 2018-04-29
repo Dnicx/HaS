@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class ActionCollider : MonoBehaviour {
     private PickableObj itemHold;
@@ -8,21 +10,26 @@ public class ActionCollider : MonoBehaviour {
     private bool isHold;
     private GameObject interactObj;
     private bool isAction;
+    [SerializeField]
+    private Text text;
 
 	// Use this for initialization
 	void Start () {
         isAction = false;
         interactObj = null;
         isHold = false;
+        text = GameObject.Find("ActionText").GetComponent<Text>();
+
         Physics.IgnoreLayerCollision(9, 10);
         Debug.Log("spawn action col");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(interactObj != null)
+		if(interactObj != null && !isHold)
         {
             InteractabltObj obj = interactObj.GetComponent<InteractabltObj>();
+            text.text = "Left Click to action";
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 PickableObj tmp = obj as PickableObj;
@@ -31,6 +38,7 @@ public class ActionCollider : MonoBehaviour {
                     itemHold = interactObj.GetComponent<PickableObj>();
                     itemHold.Pick();
                     isHold = true;
+                    interactObj = null;
                 }
                 isAction = true;
                 obj.actionDirection = this.transform.forward.normalized;
@@ -41,12 +49,12 @@ public class ActionCollider : MonoBehaviour {
                 isAction = false;
                 obj.noAction();
             }
-            print(obj + " " + itemHold);
+            //print(obj + " " + itemHold);
 
         }
         else
         {
-
+            text.text = "";
             isAction = false;
         }
 
@@ -106,7 +114,8 @@ public class ActionCollider : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Interact Obj"))
         {
-            interactObj = other.gameObject;
+            if(other.gameObject != itemHold)
+                interactObj = other.gameObject;
             
         }
 
