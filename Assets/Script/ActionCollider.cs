@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ActionCollider : MonoBehaviour {
     private PickableObj itemHold;
-    private bool isHold; 
+    private bool isHold;
+    private bool isThrow;
     private GameObject interactObj;
     private bool isAction;
 
@@ -12,6 +13,7 @@ public class ActionCollider : MonoBehaviour {
 	void Start () {
         isAction = false;
         interactObj = null;
+        isThrow = false;
         isHold = false;
         Physics.IgnoreLayerCollision(9, 10);
         Debug.Log("spawn action col");
@@ -22,10 +24,10 @@ public class ActionCollider : MonoBehaviour {
 		if(interactObj != null)
         {
             InteractabltObj obj = interactObj.GetComponent<InteractabltObj>();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 PickableObj tmp = obj as PickableObj;
-                if (tmp != null)
+                if (tmp != null && tmp != itemHold)
                 {
                     itemHold = interactObj.GetComponent<PickableObj>();
                     itemHold.Pick();
@@ -35,14 +37,25 @@ public class ActionCollider : MonoBehaviour {
                 obj.actionDirection = this.transform.forward.normalized;
                 obj.action();
             }
-            else if (Input.GetKeyUp(KeyCode.Space))
+            else if (Input.GetKeyUp(KeyCode.Mouse0))
             {
                 isAction = false;
                 obj.noAction();
             }
+            if (isThrow && obj != itemHold)
+            {
+                itemHold = null;
+                isThrow = false;
+            }
+
         }
         else
         {
+            if (isThrow)
+            {
+                itemHold = null;
+                isThrow = false;
+            }
             isAction = false;
         }
 
@@ -69,9 +82,9 @@ public class ActionCollider : MonoBehaviour {
     {
         if(itemHold != null)
         {
+            isThrow = true;
             isHold = false;
             itemHold.ThrowObj();
-            itemHold = null;
         }
     }
 
