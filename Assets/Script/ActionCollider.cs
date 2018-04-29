@@ -14,6 +14,7 @@ public class ActionCollider : MonoBehaviour {
         interactObj = null;
         isHold = false;
         Physics.IgnoreLayerCollision(9, 10);
+        Debug.Log("spawn action col");
 	}
 	
 	// Update is called once per frame

@@ -279,6 +279,8 @@ GameObject:
   - component: {fileID: 114818305261363274}
   - component: {fileID: 114439230233842350}
   - component: {fileID: 114358841302552870}
+  - component: {fileID: 65545838390184944}
+  - component: {fileID: 114733045277030428}
   m_Layer: 0
   m_Name: aj
   m_TagString: Untagged
@@ -840,6 +842,8 @@ GameObject:
   - component: {fileID: 20414406365969660}
   - component: {fileID: 124330063403502576}
   - component: {fileID: 81357581895727920}
+  - component: {fileID: 65314814917410870}
+  - component: {fileID: 114243984787494426}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2382,6 +2386,30 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!65 &65314814917410870
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638708111051756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04551017, y: 0.0565176, z: 1.3488832}
+  m_Center: {x: -0.000007901341, y: 0.009999998, z: 0.6244352}
+--- !u!65 &65545838390184944
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218796955524112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.38, y: 0.48, z: 0.52}
+  m_Center: {x: 0, y: 1.56, z: 0}
 --- !u!81 &81357581895727920
 AudioListener:
   m_ObjectHideFlags: 1
@@ -2398,7 +2426,7 @@ Animator:
   m_GameObject: {fileID: 1218796955524112}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 08dc34b8d2f1146cc9b122353af5eb7e, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 658f1e1630568460990c059df95b7572, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2406,6 +2434,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114243984787494426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1638708111051756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65ee522b11c7b44bad5b741ba518582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114358841302552870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2459,6 +2498,25 @@ MonoBehaviour:
     i15: 191
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114733045277030428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218796955524112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95491274307170890}
+  m_ParameterSendBits: 511
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114818305261363274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2470,12 +2528,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13eb56607745564395609a69db247e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  walkSpeed: 2
+  runSpeed: 4
+  crouchSpeed: 1.5
+  proneSpeed: 1
   gravity: 2
   crouchFactor: 0.5
+  standable: 0
+  currentSpeed: 0
   playerCam: {fileID: 20414406365969660}
   actionCollider: {fileID: 0}
   model: []
+  localVisible: 0
 --- !u!124 &124330063403502576
 Behaviour:
   m_ObjectHideFlags: 1
@@ -2969,10 +3033,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.8
+  m_Radius: 0.24
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.94, z: 0}
