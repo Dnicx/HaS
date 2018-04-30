@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class CharacterControllerScript : NetworkBehaviour {
 
@@ -29,6 +30,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 	[SerializeField] private GameObject footSound;
 	[SerializeField] private GameObject voice;
 	[SerializeField] private GameObject deadSound;
+    [SerializeField]
+    private Text text;
 
 	private float height;
 	private Vector3 camPos;
@@ -77,6 +80,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 				otherCam.gameObject.SetActive(false);
 			return;
 		}
+        text = GameObject.Find("ResultText").GetComponent<Text>();
+		text.text = "";
 	}
 	
 	// Update is called once per frame
@@ -87,6 +92,13 @@ public class CharacterControllerScript : NetworkBehaviour {
 			deadSound.GetComponent<AudioSource>().Play();
 			return;
 		}
+		if (playerStatus.end == 1) {
+			text.text = "Predator Wins";
+		}
+		if (playerStatus.end == 2) {
+			text.text = "Prey Wins";
+		}
+
 
         if(actionCollider.isItemHold() && Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -115,7 +127,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 				currentSpeed = walkSpeed;
 				running = false;
 			}
-			if (!footSound.GetComponent<AudioSource>().isPlaying) footSound.GetComponent<AudioSource>().Play();
+			print(Input.GetAxisRaw("Crouch"));
+			if (!footSound.GetComponent<AudioSource>().isPlaying && Input.GetAxisRaw("Crouch") == 0) footSound.GetComponent<AudioSource>().Play();
 		} else {
 			anim.SetBool("isWalk", false);
 			anim.SetBool("isRun", false);
@@ -140,6 +153,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 		}
 		if (cooledDown) {
 			if (Input.GetAxis("Attack") > 0 && playerStat.isArmed()) {
+				footSound.GetComponent<AudioSource>().Stop();
 				if(hitBox.GetComponent<hitArea>().Hit()) {
 					if (actionCollider.isHoldingHoly()) {
 						actionCollider.HolyHit();
