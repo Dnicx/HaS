@@ -3157,6 +3157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65ee522b11c7b44bad5b741ba518582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!114 &114592284476472474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3171,6 +3172,7 @@ MonoBehaviour:
   health: 3
   predator: 1
   dead: 0
+  armed: 1
 --- !u!114 &114658365260072880
 MonoBehaviour:
   m_ObjectHideFlags: 1

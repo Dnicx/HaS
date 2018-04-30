@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.XR;
 
 public class CharacterControllerScript : NetworkBehaviour {
 
@@ -132,7 +133,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 				anim.SetBool("isAttack", true);
 				StartCoroutine(attackTime());
 				StartCoroutine(cooldownTime());
-				if (playerStat.IsPredator()) playerStat.unequip();
+				if (!playerStat.IsPredator()) playerStat.unequip();
 			}
 		}
 		else anim.SetBool("isAttack", false);
@@ -158,12 +159,16 @@ public class CharacterControllerScript : NetworkBehaviour {
 
     private void Rotate()
     {
-        transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
-        look -= PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse Y");
-        look = look > 60 ? 60 : look;
-        look = look < -90 ? -90 : look;
-        playerCam.transform.rotation = Quaternion.Euler(new Vector3(look, transform.localEulerAngles.y, transform.rotation.eulerAngles.z));
-    }
+		transform.Rotate(new Vector3(0, PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse X"), 0));
+		transform.Rotate(new Vector3(0, PlayerSetting.JOY_CAMERA_SPEED * Input.GetAxis("ZHorizontal"), 0));
+        if (!XRDevice.isPresent) {
+			look -= PlayerSetting.CAMERA_SPEED * Input.GetAxis("Mouse Y");
+			look -= PlayerSetting.JOY_CAMERA_SPEED * Input.GetAxis("ZVertical");
+			look = look > 60 ? 60 : look;
+			look = look < -90 ? -90 : look;
+			playerCam.transform.rotation = Quaternion.Euler(new Vector3(look, transform.localEulerAngles.y, transform.rotation.eulerAngles.z));
+		}
+	}
 
     private void OnTriggerStay(Collider other) {
 		if (other.gameObject.tag != gameObject.tag) standable = false;

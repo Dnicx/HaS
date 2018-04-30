@@ -2429,7 +2429,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 658f1e1630568460990c059df95b7572, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2535,12 +2535,15 @@ MonoBehaviour:
   proneSpeed: 1
   gravity: 2
   crouchFactor: 0.5
+  attackT: 0
+  playerCam: {fileID: 20414406365969660}
+  hitBox: {fileID: 0}
+  hurtBox: {fileID: 0}
+  actionCollider: {fileID: 0}
   standable: 0
   currentSpeed: 0
-  playerCam: {fileID: 20414406365969660}
-  actionCollider: {fileID: 0}
-  model: []
   localVisible: 0
+  model: []
 --- !u!124 &124330063403502576
 Behaviour:
   m_ObjectHideFlags: 1
