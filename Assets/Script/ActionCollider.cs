@@ -30,11 +30,19 @@ public class ActionCollider : MonoBehaviour {
 		if(interactObj != null && !isHold)
         {
             InteractabltObj obj = interactObj.GetComponent<InteractabltObj>();
-            text.text = "Left Click to action";
+            PickableObj tmp = obj as PickableObj;
+            if (tmp != null && itemHold != null)
+            {
+                text.text = "";
+            }
+            else
+            {
+                text.text = "Left Click to action";
+            }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                PickableObj tmp = obj as PickableObj;
-                if (tmp != null && threwItem == null)
+
+                if (tmp != null && threwItem == null && itemHold == null)
                 {
                     itemHold = interactObj.GetComponent<PickableObj>();
                     itemHold.Pick();
