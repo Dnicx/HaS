@@ -911,6 +911,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 496318124c66ac04baab5e99ac219be8, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1894876602
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016146261258798, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1958629123
 Prefab:
   m_ObjectHideFlags: 0
@@ -1079,7 +1121,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1218796955524112, guid: fd6ca6348c63c4a4f97b5dc39c57b1bf,
+  m_PlayerPrefab: {fileID: 1165141985446218, guid: e715280e555d033458761203ebf872bb,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1

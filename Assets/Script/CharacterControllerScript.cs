@@ -26,6 +26,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 	private playerStatus playerStat;
 
     [SerializeField] private ActionCollider actionCollider;
+	[SerializeField] private GameObject footSound;
+	[SerializeField] private GameObject voice;
 
 	private float height;
 	private Vector3 camPos;
@@ -111,9 +113,12 @@ public class CharacterControllerScript : NetworkBehaviour {
 				currentSpeed = walkSpeed;
 				running = false;
 			}
+			if (!footSound.GetComponent<AudioSource>().isPlaying) footSound.GetComponent<AudioSource>().Play();
 		} else {
 			anim.SetBool("isWalk", false);
 			anim.SetBool("isRun", false);
+			footSound.GetComponent<AudioSource>().Stop();
+
 		}
 		if (Input.GetAxisRaw("Crouch") > 0 && !attacking) {
 			anim.SetBool("isCrouch", true);
@@ -133,12 +138,18 @@ public class CharacterControllerScript : NetworkBehaviour {
 		}
 		if (cooledDown) {
 			if (Input.GetAxis("Attack") > 0 && playerStat.isArmed()) {
-				hitBox.GetComponent<hitArea>().Hit();
-				if(actionCollider.isHoldingHoly()) actionCollider.HolyHit();
+				if(hitBox.GetComponent<hitArea>().Hit()) {
+					if (actionCollider.isHoldingHoly()) {
+						actionCollider.HolyHit();
+					}
+					if (!playerStat.IsPredator()) playerStat.unequip();
+					
+				}else{
+					voice.GetComponent<AudioSource>().Play();
+				}
 				anim.SetBool("isAttack", true);
 				StartCoroutine(attackTime());
 				StartCoroutine(cooldownTime());
-				if (!playerStat.IsPredator()) playerStat.unequip();
 			}
 		}
 		else anim.SetBool("isAttack", false);
