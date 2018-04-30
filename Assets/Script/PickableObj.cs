@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PickableObj : InteractabltObj {
 
+    [SerializeField] private bool Holy;
+
     public void Keep()
     {
         Collider collider = (GetComponent<Collider>());
@@ -11,7 +13,7 @@ public class PickableObj : InteractabltObj {
         this.gameObject.SetActive(false);
     }
 
-    public void Pick()
+    public virtual void Pick()
     {
         Collider collider = (GetComponent<Collider>());
         collider.enabled = false;

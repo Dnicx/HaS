@@ -14,12 +14,12 @@ public class customNetworkManager : NetworkManager {
 	public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
 		if (!role[PREDATOR]){
 			role[PREDATOR] = true;
-			GameObject predatorPlayer = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+			GameObject predatorPlayer = Instantiate(playerPrefab, GetStartPosition().position, Quaternion.identity);
 			NetworkServer.AddPlayerForConnection(conn, predatorPlayer, playerControllerId);
 		}
 		else {
 			role[PREY] = true;
-			GameObject preyPlayer = Instantiate(playerPrefab2, Vector3.zero, Quaternion.identity);
+			GameObject preyPlayer = Instantiate(playerPrefab2, GetStartPosition().position, Quaternion.identity);
 			NetworkServer.AddPlayerForConnection(conn, preyPlayer, playerControllerId);
 		}
 	}
