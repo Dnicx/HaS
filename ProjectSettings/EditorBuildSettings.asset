@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_scene/character playground.unity
     guid: 53035f53bf423f944b93b3ba787d42db
+  - enabled: 1
+    path: Assets/_scene/Test.unity
+    guid: e68440721f2fa024ab5d3be66ad3b8ad
+  - enabled: 1
+    path: Assets/Library.unity
+    guid: 0210872f9c43641b3a31f8b411f203b7
