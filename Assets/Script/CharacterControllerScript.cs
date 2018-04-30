@@ -92,12 +92,12 @@ public class CharacterControllerScript : NetworkBehaviour {
 			deadSound.GetComponent<AudioSource>().Play();
 			return;
 		}
-		if (playerStatus.end == 1) {
-			text.text = "Predator Wins";
-		}
-		if (playerStatus.end == 2) {
-			text.text = "Prey Wins";
-		}
+		// if (playerStatus.end == 1) {
+		// 	text.text = "Predator Wins";
+		// }
+		// if (playerStatus.end == 2) {
+		// 	text.text = "Prey Wins";
+		// }
 
 
         if(actionCollider.isItemHold() && Input.GetKeyDown(KeyCode.Mouse1))
@@ -127,7 +127,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 				currentSpeed = walkSpeed;
 				running = false;
 			}
-			print(Input.GetAxisRaw("Crouch"));
+			Debug.Log(Input.GetAxisRaw("Crouch"));
 			if (!footSound.GetComponent<AudioSource>().isPlaying && Input.GetAxisRaw("Crouch") == 0) footSound.GetComponent<AudioSource>().Play();
 		} else {
 			anim.SetBool("isWalk", false);
