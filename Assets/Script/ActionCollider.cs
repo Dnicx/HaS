@@ -39,10 +39,10 @@ public class ActionCollider : MonoBehaviour {
             {
                 text.text = "Left Click to action";
             }
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetButtonDown("Pickup"))
             {
 
-                if (tmp != null && threwItem == null && itemHold == null)
+                if (tmp != null && threwItem == null && itemHold == null && gameObject.tag == "Prey")
                 {
                     itemHold = interactObj.GetComponent<PickableObj>();
                     itemHold.Pick();
@@ -62,7 +62,7 @@ public class ActionCollider : MonoBehaviour {
                 }
                 obj.action();
             }
-            else if (Input.GetKeyUp(KeyCode.Mouse0))
+            else if (Input.GetButtonDown("Pickup"))
             {
                 isAction = false;
                 obj.noAction();
@@ -157,7 +157,7 @@ public class ActionCollider : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Interact Obj"))
         {
-            InteractabltObj obj = interactObj.GetComponent<InteractabltObj>();
+            InteractabltObj obj = interactObj!=null?interactObj.GetComponent<InteractabltObj>():null;
             obj.noAction();
             interactObj = null;
         }

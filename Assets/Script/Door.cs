@@ -47,6 +47,7 @@ public class Door : InteractabltObj {
             }
             
             rotation -= Input.GetAxis("Mouse Y") * 10 * changeDirection;
+            rotation -= Input.GetAxis("ZVertical") * 10 * changeDirection;
             rotation = rotation < 0 ? 0 : rotation;
             rotation = rotation > 135 ? 135 : rotation;
         }
