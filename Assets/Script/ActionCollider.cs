@@ -50,7 +50,7 @@ public class ActionCollider : MonoBehaviour {
                     interactObj = null;
                 }
                 isAction = true;
-                if (itemHold.isHoly()) {
+                if (itemHold != null && itemHold.isHoly()) {
                     if (handPos != null) {
                         obj.transform.position = handPos.transform.position;
                         obj.transform.rotation = handPos.transform.rotation;

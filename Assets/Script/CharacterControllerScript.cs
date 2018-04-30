@@ -46,6 +46,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Physics.IgnoreLayerCollision(11, 8);
 		characterController = GetComponent<CharacterController>();
 		anim = GetComponent<Animator>();
 		height = characterController.height;
@@ -133,7 +134,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 		if (cooledDown) {
 			if (Input.GetAxis("Attack") > 0 && playerStat.isArmed()) {
 				hitBox.GetComponent<hitArea>().Hit();
-				actionCollider.HolyHit();
+				if(actionCollider.isHoldingHoly()) actionCollider.HolyHit();
 				anim.SetBool("isAttack", true);
 				StartCoroutine(attackTime());
 				StartCoroutine(cooldownTime());
