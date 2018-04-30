@@ -28,6 +28,7 @@ public class CharacterControllerScript : NetworkBehaviour {
     [SerializeField] private ActionCollider actionCollider;
 	[SerializeField] private GameObject footSound;
 	[SerializeField] private GameObject voice;
+	[SerializeField] private GameObject deadSound;
 
 	private float height;
 	private Vector3 camPos;
@@ -83,6 +84,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 		if (!isLocalPlayer) return;
 		if (playerStat.IsDead()) {
 			anim.SetBool("isDead", true);
+			deadSound.GetComponent<AudioSource>().Play();
 			return;
 		}
 
@@ -143,7 +145,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 						actionCollider.HolyHit();
 					}
 					if (!playerStat.IsPredator()) playerStat.unequip();
-					
+
 				}else{
 					voice.GetComponent<AudioSource>().Play();
 				}
