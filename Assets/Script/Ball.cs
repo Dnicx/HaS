@@ -16,6 +16,6 @@ public class Ball : PickableObj {
 
     private void OnCollisionEnter(Collision collision)
     {
-        GetComponent<Rigidbody>().velocity = new Vector3();
+        print(collision.gameObject);
     }
 }
