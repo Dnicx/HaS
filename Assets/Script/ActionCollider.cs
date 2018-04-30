@@ -12,6 +12,7 @@ public class ActionCollider : MonoBehaviour {
     private bool isAction;
     [SerializeField]
     private Text text;
+    [SerializeField] private GameObject handPos;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +50,16 @@ public class ActionCollider : MonoBehaviour {
                     interactObj = null;
                 }
                 isAction = true;
-                obj.actionDirection = this.transform.forward.normalized;
+                if (itemHold.isHoly()) {
+                    if (handPos != null) {
+                        obj.transform.position = handPos.transform.position;
+                        obj.transform.rotation = handPos.transform.rotation;
+                    } else {
+                        obj.actionDirection = this.transform.forward.normalized;    
+                    }
+                } else {
+                    obj.actionDirection = this.transform.forward.normalized;
+                }
                 obj.action();
             }
             else if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -82,6 +92,10 @@ public class ActionCollider : MonoBehaviour {
         }
     }
 
+    public bool isHoldingHoly() {
+        return (itemHold == null?false:itemHold.isHoly());
+    }
+
     public bool IsAction()
     {
         return isAction;
@@ -99,6 +113,16 @@ public class ActionCollider : MonoBehaviour {
             isHold = false;
             threwItem = itemHold;
             itemHold.ThrowObj();
+        }
+    }
+
+    public void HolyHit() {
+        if(itemHold != null)
+        {
+            isHold = false;
+            Destroy(itemHold);
+            itemHold = null;
+            threwItem = null;
         }
     }
 

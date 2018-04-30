@@ -89,7 +89,10 @@ public class CharacterControllerScript : NetworkBehaviour {
         }
         if(actionCollider.isItemHold() && actionCollider.IsHold() && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            actionCollider.ThrowItemHold();
+            if (!actionCollider.isHoldingHoly()) {
+				actionCollider.ThrowItemHold();
+			}
+
         }
 
 		x = Input.GetAxis("Vertical");		
@@ -130,6 +133,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 		if (cooledDown) {
 			if (Input.GetAxis("Attack") > 0 && playerStat.isArmed()) {
 				hitBox.GetComponent<hitArea>().Hit();
+				actionCollider.HolyHit();
 				anim.SetBool("isAttack", true);
 				StartCoroutine(attackTime());
 				StartCoroutine(cooldownTime());
@@ -147,6 +151,8 @@ public class CharacterControllerScript : NetworkBehaviour {
 			}
 			Rotate();
 		}
+
+		if (actionCollider.isHoldingHoly()) playerStat.equip();
 	}
 
     private void Move()
