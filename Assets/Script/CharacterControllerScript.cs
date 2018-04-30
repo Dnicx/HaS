@@ -26,6 +26,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 	private playerStatus playerStat;
 
     [SerializeField] private ActionCollider actionCollider;
+	[SerializeField] private GameObject footSound;
 
 	private float height;
 	private Vector3 camPos;
@@ -83,11 +84,11 @@ public class CharacterControllerScript : NetworkBehaviour {
 			return;
 		}
 
-        if(actionCollider.isItemHold() && Input.GetKeyDown(KeyCode.Mouse1))
+        if(actionCollider.isItemHold() && Input.GetButtonDown("SwapItem"))
         {
             actionCollider.ToggleHold();
         }
-        if(actionCollider.isItemHold() && actionCollider.IsHold() && Input.GetKeyDown(KeyCode.Mouse0))
+        if(actionCollider.isItemHold() && actionCollider.IsHold() && Input.GetButtonDown("Pickup"))
         {
             if (!actionCollider.isHoldingHoly()) {
 				actionCollider.ThrowItemHold();
@@ -110,9 +111,11 @@ public class CharacterControllerScript : NetworkBehaviour {
 				currentSpeed = walkSpeed;
 				running = false;
 			}
+			if (!footSound.GetComponent<AudioSource>().isPlaying) footSound.GetComponent<AudioSource>().Play();
 		} else {
 			anim.SetBool("isWalk", false);
 			anim.SetBool("isRun", false);
+			footSound.GetComponent<AudioSource>().Stop();
 		}
 		if (Input.GetAxisRaw("Crouch") > 0 && !attacking) {
 			anim.SetBool("isCrouch", true);
@@ -133,7 +136,7 @@ public class CharacterControllerScript : NetworkBehaviour {
 		if (cooledDown) {
 			if (Input.GetAxis("Attack") > 0 && playerStat.isArmed()) {
 				hitBox.GetComponent<hitArea>().Hit();
-				actionCollider.HolyHit();
+				if (actionCollider.isHoldingHoly()) actionCollider.HolyHit();
 				anim.SetBool("isAttack", true);
 				StartCoroutine(attackTime());
 				StartCoroutine(cooldownTime());
