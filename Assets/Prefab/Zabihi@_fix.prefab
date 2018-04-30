@@ -3050,8 +3050,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04551017, y: 0.0565176, z: 1.6515583}
-  m_Center: {x: -0.000007901328, y: 0.009999998, z: 0.7757728}
+  m_Size: {x: 0.04551017, y: 0.0565176, z: 2.0351639}
+  m_Center: {x: -0.000007900277, y: 0.009999997, z: 0.96757567}
 --- !u!81 &81064498779175946
 AudioListener:
   m_ObjectHideFlags: 1
@@ -3158,6 +3158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
+  handPos: {fileID: 0}
 --- !u!114 &114592284476472474
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,9 +20,10 @@ public class hitArea : MonoBehaviour {
 		}
 	}
 
-	public void Hit() {
+	public bool Hit() {
 		Debug.Log("hitting");
 		if (otherPlayer != null) 
 			otherPlayer.Hit();
+		return (otherPlayer != null);
 	}
 }
