@@ -145,13 +145,13 @@ public class CharacterControllerScript : NetworkBehaviour {
 		
 		fallingSpeed += gravity;
 		if (characterController.isGrounded) fallingSpeed = 0;
-        if (actionCollider==null || !actionCollider.IsAction())
-		{
+        // if (actionCollider == null || !actionCollider.IsAction())
+		// {
 			if (!attacking) {
 	            Move();
 			}
 			Rotate();
-		}
+		// }
 
 		if (actionCollider.isHoldingHoly()) playerStat.equip();
 	}
