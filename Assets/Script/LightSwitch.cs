@@ -9,6 +9,10 @@ public class LightSwitch : InteractabltObj {
     private int isToggle;
 	// Use this for initialization
 	void Start () {
+        foreach(Light l in lightSource)
+        {
+            l.enabled = enabled;
+        }
         isLightOn = true;
         isToggle = -1;
 	}

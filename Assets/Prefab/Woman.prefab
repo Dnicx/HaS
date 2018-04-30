@@ -2040,6 +2040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195389041778412}
   - component: {fileID: 95910245836348584}
+  - component: {fileID: 114469007898953920}
   - component: {fileID: 114426055533035716}
   - component: {fileID: 114155885732475386}
   - component: {fileID: 143606075996350904}
@@ -4447,12 +4448,30 @@ MonoBehaviour:
   proneSpeed: 0
   gravity: 9.8
   crouchFactor: 0
+  attackT: 0
+  playerCam: {fileID: 20408016013916898}
+  hitBox: {fileID: 0}
+  hurtBox: {fileID: 0}
+  actionCollider: {fileID: 114864159149950730}
   standable: 0
   currentSpeed: 0
-  playerCam: {fileID: 20408016013916898}
-  actionCollider: {fileID: 114864159149950730}
-  model: []
   localVisible: 0
+  model: []
+--- !u!114 &114469007898953920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865824174360010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90eaa53bf562f4c42b12dcc0e7e7aecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  predator: 0
+  dead: 0
+  armed: 0
 --- !u!114 &114864159149950730
 MonoBehaviour:
   m_ObjectHideFlags: 1
